@@ -1,4 +1,6 @@
-import { AccountBalanceWalletRounded, Chat, Favorite, HomeRounded, Settings, SummarizeRounded } from "@mui/icons-material";
+/* eslint-disable no-unused-vars */
+/* eslint-disable multiline-ternary */
+/* eslint-disable comma-dangle */
 import { useEffect, useState } from "react";
 import "./App.css";
 import BannerName from "./components/BannerName";
@@ -8,16 +10,17 @@ import DebitCard from "./components/DebitCard";
 import Header from "./components/Header";
 import ItemCard from "./components/ItemCard";
 import MenuCard from "./components/MenuCard";
-import MenuContainer from "./components/MenuContainer";
 import { useStateValue } from "./components/StateProvider";
 import SubMenuContainer from "./components/SubMenuContainer";
+import { calculateTotalPrice } from "./components/reducer";
 
 function App() {
+  const [{ cart }, dispatch] = useStateValue();
+  const total = calculateTotalPrice(cart);
+  const totalPriceWIthDecimal = total.toFixed(2);
   const [isMainData, setMainData] = useState(
     Items.filter((element) => element.itemId === "buger01")
   );
-  // eslint-disable-next-line no-unused-vars
-  const [{ cart }, dispatch] = useStateValue();
 
   useEffect(() => {
     const menuLi = document.querySelectorAll("#menu li");
@@ -27,16 +30,22 @@ function App() {
       this.classList.add("active");
     }
 
-    menuLi.forEach((element) => element.addEventListener("click", setMenuActive));
+    menuLi.forEach((element) =>
+      element.addEventListener("click", setMenuActive)
+    );
 
-    const menuCards = document.querySelector(".rowContainer").querySelectorAll(".rowMenuCard");
+    const menuCards = document
+      .querySelector(".rowContainer")
+      .querySelectorAll(".rowMenuCard");
 
     function setMenuCardActive() {
       menuCards.forEach((element) => element.classList.remove("active"));
       this.classList.add("active");
     }
 
-    menuCards.forEach(element => element.addEventListener("click", setMenuCardActive));
+    menuCards.forEach((element) =>
+      element.addEventListener("click", setMenuCardActive)
+    );
   }, [isMainData, cart]);
 
   // set main dish items on filter
@@ -56,7 +65,9 @@ function App() {
             <BannerName name="Avijit" discount="20" link="#" />
             <img
               className="deliveryPic"
-              src="https://i.pinimg.com/originals/07/e1/24/07e124fc1110cfc2d307792798549ca6.png" alt="" />
+              src="https://i.pinimg.com/originals/07/e1/24/07e124fc1110cfc2d307792798549ca6.png"
+              alt=""
+            />
           </div>
 
           {/* FoodContainer */}
@@ -65,38 +76,33 @@ function App() {
               <SubMenuContainer name={"Menu Category"} />
             </div>
             <div className="rowContainer">
-
-              {
-                MenuItems && MenuItems.map(data => (
+              {MenuItems &&
+                MenuItems.map((data) => (
                   <div key={data.id} onClick={() => setData(data.itemId)}>
-
                     <MenuCard
                       imgSrc={data.imgSrc}
                       name={data.name}
                       isActive={data.id === 1}
                     />
                   </div>
-                ))
-              }
-
+                ))}
             </div>
             <div className="foodItemContainer">
-
-              {
-                isMainData && isMainData.map((data) => (
+              {isMainData &&
+                isMainData.map((data) => (
                   <ItemCard
                     key={data.id}
                     itemId={data.id}
+                    id={data.id}
                     imgSrc={data.imgSrc}
                     name={data.name}
                     ratings={data.ratings}
-                    price={data.price} />
-                ))
-              }
-
+                    price={data.price}
+                    quantity={data.quantity}
+                  />
+                ))}
             </div>
           </div>
-
         </div>
 
         <div className="rightMenu">
@@ -106,43 +112,44 @@ function App() {
             </div>
           </div>
 
-          {!cart
-            ? <div></div>
-
-            : <div className="cartCheckOutContainer">
+          {!cart ? (
+            <div></div>
+          ) : (
+            <div className="cartCheckOutContainer">
               <SubMenuContainer name={"Carts Items"} />
               <div className="cartContainer">
-
                 <div className="cartItems">
-                  {cart && cart.map((data) => (
-                    <CartItem
-                      key={data.id}
-                      itemId={data.id}
-                      name={data.name}
-                      imgSrc={data.imgSrc}
-                      price={data.price}
-                    />
-                  ))
-                  }
-
+                  {cart &&
+                    cart.map((data) => (
+                      <CartItem
+                        key={Math.random()}
+                        itemId={data.id}
+                        id={data.id}
+                        name={data.name}
+                        imgSrc={data.imgSrc}
+                        price={data.price}
+                        quantity={data.quantity}
+                      />
+                    ))}
                 </div>
               </div>
 
               <div className="totalSection">
                 <h3>Total</h3>
                 <p>
-                  <span>$ </span>45.0
+                  <span>$ </span>
+                  {totalPriceWIthDecimal}
                 </p>
               </div>
 
               <button className="checkOut">Checkout</button>
-            </div>}
-
+            </div>
+          )}
         </div>
       </main>
 
       {/* Bottom Menu */}
-      <div className="bottomMenu">
+      {/* <div className="bottomMenu">
         <ul id="menu">
           <MenuContainer link={"#"} icon={<HomeRounded />} isHome />
           <MenuContainer link={"#"} icon={<Chat />} />
@@ -153,8 +160,7 @@ function App() {
 
           <div className="indicator"></div>
         </ul>
-      </div>
-
+      </div> */}
     </div>
   );
 }

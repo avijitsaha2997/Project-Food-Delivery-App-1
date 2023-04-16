@@ -1,38 +1,21 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable comma-dangle */
 import { AddRounded, RemoveRounded } from "@mui/icons-material";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useStateValue } from "./StateProvider";
-// eslint-disable-next-line no-unused-vars
-let cartItems = [];
 
-function CartItem({ name, imgSrc, price, itemId }) {
-  // eslint-disable-next-line no-unused-vars
-  const [qty, setQty] = useState(1);
-
-  // eslint-disable-next-line no-unused-vars
+function CartItem({ name, imgSrc, price, itemId, quantity, id }) {
   const [{ cart }, dispatch] = useStateValue();
-  const [itemPrice, setItemPrice] = useState(parseInt(qty) * parseFloat(price));
 
-  useEffect(() => {
-    cartItems = cart;
-    setItemPrice(parseInt(qty) * parseFloat(price));
-  }, [qty]);
-
-  const updateQuantity = (action, id) => {
-    if (action === "add") {
-      setQty(qty + 1);
-    } else {
-      if (qty === 1) {
-        const updatedCart = cartItems.filter((item) => item.id !== id);
-        dispatch({
-          type: "SET_CART",
-          cart: updatedCart,
-        });
-      }
-
-      setQty(qty - 1);
-    }
+  const updateQuantityAdd = () => {
+    dispatch({ type: "add", id });
+    console.log("work");
   };
+  const updateQuantityRemove = () => {
+    dispatch({ type: "remove", id });
+    console.log("work");
+  };
+
   return (
     <div className="cartItem">
       <div className="imgBox">
@@ -43,24 +26,21 @@ function CartItem({ name, imgSrc, price, itemId }) {
         <h2 className="itemName">{name}</h2>
 
         <div className="itemQuantity">
-          <span>X {qty}</span>
+          <span>X {quantity}</span>
 
           <div className="quantity">
             <RemoveRounded
               className="itemRemove"
-              onClick={() => updateQuantity("remove", itemId)}
+              onClick={updateQuantityRemove}
             />
-            <AddRounded
-              className="itemAdd"
-              onClick={() => updateQuantity("add", itemId)}
-            />
+            <AddRounded className="itemAdd" onClick={updateQuantityAdd} />
           </div>
         </div>
       </div>
 
       <p className="itemPrice">
         <span className="dollarSign">$ </span>
-        <span className="itemPriceValue">{itemPrice}</span>
+        <span className="itemPriceValue">{price}</span>
       </p>
     </div>
   );
