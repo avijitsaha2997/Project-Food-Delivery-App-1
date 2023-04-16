@@ -1,0 +1,31 @@
+.LoginDiv {
+  width: 100%;
+  height: 100%;
+  background: grey;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.buttonDiv {
+  border: 1px solid black;
+  border-radius: 10px;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+}
+.googleImg {
+  width: 5%;
+}
+.loginButton {
+  padding: 10px;
+  border-radius: 10px;
+  color: greenyellow;
+  font-weight: bolder;
+  font-size: xx-large;
+  border: none;
+}
