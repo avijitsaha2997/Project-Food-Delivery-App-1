@@ -1,6 +1,11 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable multiline-ternary */
 /* eslint-disable comma-dangle */
+import { HomeRounded } from "@mui/icons-material";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LanguageIcon from "@mui/icons-material/Language";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import { useEffect, useState } from "react";
 import BannerName from "./BannerName";
 import CartItem from "./CartItem";
@@ -10,6 +15,7 @@ import Header from "./Header";
 import "./Home.css";
 import ItemCard from "./ItemCard";
 import MenuCard from "./MenuCard";
+import MenuContainer from "./MenuContainer";
 import { useStateValue } from "./StateProvider";
 import SubMenuContainer from "./SubMenuContainer";
 import { calculateTotalPrice } from "./reducer";
@@ -149,18 +155,28 @@ function Home() {
       </main>
 
       {/* Bottom Menu */}
-      {/* <div className="bottomMenu">
+      <div className="bottomMenu">
         <ul id="menu">
-          <MenuContainer link={"#"} icon={<HomeRounded />} isHome />
-          <MenuContainer link={"#"} icon={<Chat />} />
-          <MenuContainer link={"#"} icon={<AccountBalanceWalletRounded />} />
-          <MenuContainer link={"#"} icon={<Favorite />} />
-          <MenuContainer link={"#"} icon={<SummarizeRounded />} />
-          <MenuContainer link={"#"} icon={<Settings />} />
-
+          <MenuContainer
+            link={"https://github.com/avijitsaha2997"}
+            icon={<GitHubIcon />}
+          />
+          <MenuContainer
+            link={"https://www.facebook.com/wwwhite.angelll/"}
+            icon={<FacebookIcon />}
+          />
+          <MenuContainer link={"/home"} icon={<HomeRounded />} isHome />
+          <MenuContainer
+            link={"https://www.linkedin.com/in/avijitsaha2997/"}
+            icon={<LinkedInIcon />}
+          />
+          <MenuContainer
+            link={"https://avijit-saha2997.web.app/"}
+            icon={<LanguageIcon />}
+          />
           <div className="indicator"></div>
         </ul>
-      </div> */}
+      </div>
     </div>
   );
 }
