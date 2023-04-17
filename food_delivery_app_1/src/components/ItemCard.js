@@ -2,6 +2,8 @@
 /* eslint-disable comma-dangle */
 import { AddRounded, Favorite, StarRounded } from "@mui/icons-material";
 import React, { useState } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 import { useStateValue } from "./StateProvider";
 
 function ItemCard({ imgSrc, name, ratings, price, itemId, quantity, id }) {
@@ -39,7 +41,14 @@ function ItemCard({ imgSrc, name, ratings, price, itemId, quantity, id }) {
       </div>
 
       <div className="imgBox">
-        <img src={imgSrc} alt="" className="itemImg" />
+        <LazyLoadImage
+          effect="blur"
+          src={imgSrc}
+          alt=""
+          className="itemImg"
+          height={"200px"}
+          width={"200px"}
+        />
       </div>
 
       <div className="itemContent">
