@@ -4,7 +4,6 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import React from "react";
 import "./Header.css";
 import { useStateValue } from "./StateProvider";
-import pic from "./profilepic.jpg";
 
 function Header() {
   // eslint-disable-next-line no-unused-vars
@@ -13,7 +12,8 @@ function Header() {
     document.querySelector(".rightMenu").classList.toggle("active");
   };
   // console.log("hi");
-
+  const pic = localStorage.getItem("profilePic");
+  console.log(pic);
   return (
     <header>
       <img
@@ -38,7 +38,7 @@ function Header() {
         <div className="imgBox">
           <img className="profilePic" src={pic} alt="" />
         </div>
-        <h2 className="userName">Avijit</h2>
+        <h2 className="userName">{localStorage.getItem("name")}</h2>
       </div>
 
       <div className="toggleMenu" onClick={toggleMenu}>

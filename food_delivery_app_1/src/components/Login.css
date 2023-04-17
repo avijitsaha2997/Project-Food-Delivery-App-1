@@ -8,10 +8,10 @@
   align-items: center;
 }
 .buttonDiv {
-  border: 1px solid black;
+  border: 3px solid yellowgreen;
   border-radius: 10px;
   cursor: pointer;
-
+  background-color: rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: center;
   align-items: center;
